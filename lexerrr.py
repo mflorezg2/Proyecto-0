@@ -110,10 +110,31 @@ t_ignore = ' \t'
 lexer = lex.lex()
 data = "(defun goend() (if (not (blocked?)) ((pick :balloons 5) (goend))(null)))"
 lexer.input(data)
+lista_tokens=[]
 while True:
     tok = lexer.token()
     if not tok:
         break  # No more input
     print(tok)
+    lista_tokens.append(tok)
 
-
+def parser_defvar():
+    #contador=0
+    i=0
+    if lista_tokens[i].type=="left_parenth":
+        contador+=1
+        i+=1
+        if lista_tokens[i].type=="nombre":
+            i+=1
+            if lista_tokens[i].type=="number":
+                i+=1
+                if lista_tokens[i].type=="right_parenth":
+                    return True
+            else:
+                return False
+        else: 
+            return False
+                
+    else: 
+        return False
+parser_defvar()
