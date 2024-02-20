@@ -146,7 +146,7 @@ def parser_defvar():
             if lista_tokens[i].type=="number":
                 i+=1
                 if lista_tokens[i].type=="right_parenth":
-                    return True
+                    return True,i
             else:
                 return False
         else: 
@@ -154,7 +154,7 @@ def parser_defvar():
                 
     else: 
         return False
-parser_defvar()
+print(parser_defvar())
 def parser_name():
     i=0
     if lista_tokens[i].type=="left_parenth":
@@ -164,7 +164,7 @@ def parser_name():
             if lista_tokens[i].type=="number":
                 i+=1
                 if lista_tokens[i].type=="right_parenth":
-                    return True
+                    return True,i
                 else:
                     return False
             else:
@@ -173,7 +173,6 @@ def parser_name():
             return False
     else:
         return False
-print(parser_defvar())
 def parser_move():
     i=0
     if lista_tokens[i].type=="left_parenth":
@@ -183,7 +182,7 @@ def parser_move():
             if lista_tokens[i].type=="number":
                 i+=1
                 if lista_tokens[i].type=="right_parenth":
-                    return True
+                    return True,i
                 else:
                     return False
             else:
@@ -202,7 +201,7 @@ def parser_face():
             if lista_tokens[i].type=="direction":
                 i+=1
                 if lista_tokens[i].type=="right_parenth":
-                    return True
+                    return True,i
                 else:
                     return False
             else:
@@ -213,14 +212,14 @@ def parser_face():
         return False
 def skipN():
     i = 0
-    if lista_tokens [i].type == "left_parenth":
+    if lista_tokens[i].type == "left_parenth":
         i+=1
-        if lista_tokens [i].type == "skip":
+        if lista_tokens[i].type == "skip":
             i+=1
             if lista_tokens[i].type == "number":
                 i+=1
-                if lista_tokens [i].type == "right_parenth":
-                    return True
+                if lista_tokens[i].type == "right_parenth":
+                    return True,i
                 else:
                     return False
             else: 
@@ -231,14 +230,14 @@ def skipN():
         return False
 def turnD():
     i=0
-    if lista_tokens [i].type == "left_parenth":
+    if lista_tokens[i].type == "left_parenth":
         i+=1
         if lista_tokens[i].type == "turn":
             i+=1
-            if lista_tokens [i].type == "direction":
+            if lista_tokens[i].type == "direction":
                 i+=1
-                if lista_tokens [i].type == "right_parenth":
-                    return True
+                if lista_tokens[i].type == "right_parenth":
+                    return True,i
                 else:
                     return False
             else:
@@ -258,7 +257,7 @@ def parser_move_face():
             if lista_tokens[i].type=="direction":
                 i+=1
                 if lista_tokens[i].type=="right_parenth":
-                    return True
+                    return True,i
                     
                 else:
                     return False
@@ -270,19 +269,20 @@ def parser_move_face():
         return False
 def putXn():
     i=0
-    if lista_tokens [i].type == "left_parenth":
+    if lista_tokens[i].type == "left_parenth":
         i+=1
-        if lista_tokens [i].type == "put":
+        if lista_tokens[i].type == "put":
             i+=1
-            if lista_tokens [i].type == "i_objects":
+            if lista_tokens[i].type == "i_objects":
                 i+=1
                 if lista_tokens[i].type == "number":
                     i+=1
-                    if lista_tokens [i].type == "right_parenth":
-                        return True
+                    if lista_tokens[i].type == "right_parenth":
+                        return True,i
                     else:
                         return False
-                else: return False
+                else: 
+                    return False
             else: 
                 return False
         else: 
@@ -290,16 +290,16 @@ def putXn():
     else: return False
 def pickXn():
     i=0
-    if lista_tokens [i].type == "left_parenth":
+    if lista_tokens[i].type == "left_parenth":
         i+=1
-        if lista_tokens [i].type == "pick":
+        if lista_tokens[i].type == "pick":
             i+=1
-            if lista_tokens [i].type == "i_objects":
+            if lista_tokens[i].type == "i_objects":
                 i+=1
                 if lista_tokens[i].type == "number":
                     i+=1
-                    if lista_tokens [i].type == "right_parenth":
-                        return True
+                    if lista_tokens[i].type == "right_parenth":
+                        return True,i
                     else:
                         return False
                 else: return False
@@ -310,16 +310,16 @@ def pickXn():
     else: return False
 def moveDirND():
     i=0
-    if lista_tokens [i].type == "left_parenth":
+    if lista_tokens[i].type == "left_parenth":
         i+=1
-        if lista_tokens [i].type == "move_dir":
+        if lista_tokens[i].type == "move_dir":
             i+=1
-            if lista_tokens [i].type == "number":
+            if lista_tokens[i].type == "number":
                 i+=1
                 if lista_tokens[i].type == "direction":
                     i+=1
-                    if lista_tokens [i].type == "right_parenth":
-                        return True
+                    if lista_tokens[i].type == "right_parenth":
+                        return True,i
                     else:
                         return False
                 else: return False
@@ -332,12 +332,12 @@ def runDirsDS():
     i=0
     if lista_tokens [i].type == "left_parenth":
         i+=1
-        if lista_tokens [i].type == "run_dirs":
+        if lista_tokens[i].type == "run_dirs":
             i+=1
-            if lista_tokens [i].type == "right_parenth":
-                
+            if lista_tokens[i].type == "right_parenth":
+                return True,i
+            else:
                 return False
-            else: return False
         else: 
             return False
     else: 
@@ -345,12 +345,12 @@ def runDirsDS():
 
 def null():
     i=0
-    if lista_tokens [i].type == "left_parenth":
+    if lista_tokens[i].type == "left_parenth":
         i+=1
-        if lista_tokens [i].type == "null":
+        if lista_tokens[i].type == "null":
             i+=1
-            if lista_tokens [i].type == "right_parenth":
-                return True
+            if lista_tokens[i].type == "right_parenth":
+                return True,i
             else:
                 return False
         else: return False
@@ -359,15 +359,188 @@ def null():
 
 def parser_conditionals():
     i=0
-    if lista_tokens [i].type == "left_parenth":
+    if lista_tokens[i].type == "left_parenth":
         i+=1
-        if lista_tokens [i].type == "if":
+        if lista_tokens[i].type == "if":
             i+=1
-            if lista_tokens [i].type == "conditional":
+            if lista_tokens[i].type == "conditional":
                 i+=1
+                if lista_tokens [i].type=="null":
+                    k=null()
+                    if k[0]==True:
+                        i+=k[2]
+                elif lista_tokens[i].type=="run_dirs":
+                    k=runDirsDS()
+                    if k[0]==True:
+                        i+=k[2]
+                elif lista_tokens[i].type=="move_dir":
+                    k=moveDirND()
+                    if k[0]==True:
+                        i+=k[2]
+                elif lista_tokens[i].type=="pick":
+                    k=pickXn()
+                    if k[0]==True:
+                        i+=k[2]
+                elif lista_tokens[i].type=="put":
+                    k=null()
+                    if k[0]==True:
+                        i+=k[2]
+                elif lista_tokens[i].type=="move_face":
+                    k=parser_move_face()
+                    if k[0]==True:
+                        i+=k[2]
+                elif lista_tokens[i].type=="turn":
+                    k=turnD()
+                    if k[0]==True:
+                        i+=k[2]
+                elif lista_tokens[i].type=="skip":
+                    k=skipN()
+                    if k[0]==True:
+                        i+=k[2]
+                elif lista_tokens[i].type=="face":
+                    k=parser_face()
+                    if k[0]==True:
+                        i+=k[2]
+                elif lista_tokens[i].type=="move":
+                    k=parser_move()
+                    if k[0]==True:
+                        i+=k[2]
+                elif lista_tokens[i].type=="=":
+                    k=parser_name()
+                    if k[0]==True:
+                        i+=k[2]
+                elif lista_tokens[i].type=="defvar":
+                    k=parser_defvar()
+                    if k[0]==True:
+                        i+=k[2]
+                        if lista_tokens [i].type=="null":
+                            k=null()
+                            if k[0]==True:
+                                i+=k[2]
+                        elif lista_tokens[i].type=="run_dirs":
+                            k=runDirsDS()
+                            if k[0]==True:
+                                i+=k[2]
+                        elif lista_tokens[i].type=="move_dir":
+                            k=moveDirND()
+                            if k[0]==True:
+                                i+=k[2]
+                        elif lista_tokens[i].type=="pick":
+                            k=pickXn()
+                            if k[0]==True:
+                                i+=k[2]
+                        elif lista_tokens[i].type=="put":
+                            k=null()
+                            if k[0]==True:
+                                i+=k[2]
+                        elif lista_tokens[i].type=="move_face":
+                            k=parser_move_face()
+                            if k[0]==True:
+                                i+=k[2]
+                        elif lista_tokens[i].type=="turn":
+                            k=turnD()
+                            if k[0]==True:
+                                i+=k[2]
+                        elif lista_tokens[i].type=="skip":
+                            k=skipN()
+                            if k[0]==True:
+                                i+=k[2]
+                        elif lista_tokens[i].type=="face":
+                            k=parser_face()
+                            if k[0]==True:
+                                i+=k[2]
+                        elif lista_tokens[i].type=="move":
+                            k=parser_move()
+                            if k[0]==True:
+                                i+=k[2]
+                        elif lista_tokens[i].type=="=":
+                            k=parser_name()
+                            if k[0]==True:
+                                i+=k[2]
+                        elif lista_tokens[i].type=="defvar":
+                            k=parser_defvar()
+                            if k[0]==True:
+                                i+=k[2]
+                                if lista_tokens[i].type=="right_parenth":
+                                    return True
+                                else:
+                                    return False
+                        else:
+                            return False
+                else:
+                    return False
             else:
                 return False
         else:
             return False
+    else:
+        return False
+    
+def parser_crepeat():
+    i=0
+    if lista_tokens[i].type == "left_parenth":
+        i+=1
+        if lista_tokens[i].type == "loop":
+            i+=1
+            if lista_tokens[i].type == "conditional":
+                i+=1
+                if lista_tokens [i].type=="null":
+                    k=null()
+                    if k[0]==True:
+                        i+=k[2]
+                elif lista_tokens[i].type=="run_dirs":
+                    k=runDirsDS()
+                    if k[0]==True:
+                        i+=k[2]
+                elif lista_tokens[i].type=="move_dir":
+                    k=moveDirND()
+                    if k[0]==True:
+                        i+=k[2]
+                elif lista_tokens[i].type=="pick":
+                    k=pickXn()
+                    if k[0]==True:
+                        i+=k[2]
+                elif lista_tokens[i].type=="put":
+                    k=null()
+                    if k[0]==True:
+                        i+=k[2]
+                elif lista_tokens[i].type=="move_face":
+                    k=parser_move_face()
+                    if k[0]==True:
+                        i+=k[2]
+                elif lista_tokens[i].type=="turn":
+                    k=turnD()
+                    if k[0]==True:
+                        i+=k[2]
+                elif lista_tokens[i].type=="skip":
+                    k=skipN()
+                    if k[0]==True:
+                        i+=k[2]
+                elif lista_tokens[i].type=="face":
+                    k=parser_face()
+                    if k[0]==True:
+                        i+=k[2]
+                elif lista_tokens[i].type=="move":
+                    k=parser_move()
+                    if k[0]==True:
+                        i+=k[2]
+                elif lista_tokens[i].type=="=":
+                    k=parser_name()
+                    if k[0]==True:
+                        i+=k[2]
+                elif lista_tokens[i].type=="defvar":
+                    k=parser_defvar()
+                    if k[0]==True:
+                        i+=k[2]
+                        if lista_tokens[i].type=="right_parenth":
+                            return True
+                else:
+                    return False
+            else:
+                return False
+    
+        else:
+            return False
+    
     else:
         return False
