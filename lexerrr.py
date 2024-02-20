@@ -132,7 +132,7 @@ while True:
     tok = lexer.token()
     if not tok:
         break  # No more input
-    #print(tok)
+    print(tok)
     lista_tokens.append(tok)
 
 def parser_defvar():
@@ -361,7 +361,13 @@ def parser_conditionals():
     i=0
     if lista_tokens [i].type == "left_parenth":
         i+=1
-        if lista_tokens [i].type == "null":
+        if lista_tokens [i].type == "if":
             i+=1
+            if lista_tokens [i].type == "conditional":
+                i+=1
+            else:
+                return False
+        else:
+            return False
     else:
         return False
