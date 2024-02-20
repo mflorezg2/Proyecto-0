@@ -1,4 +1,21 @@
 import ply.lex as lex
+listaInicial = [] 
+listaJunto = []
+with open ('pruebas.txt', 'r') as archivo:
+    lineas = archivo.readlines()
+    for linea in lineas:
+        linea = linea.strip()
+        if linea:
+            print(linea)
+            listaInicial.append(linea)
+#print("\n")
+#print(listaInicial)
+
+for cadaLinea in listaInicial:
+    textoPegado = cadaLinea.replace(" ", "")
+    listaJunto.append(textoPegado)
+#print("\n")
+#print(listaJunto)
 
 tokens = ["nombre", "move", "skip", "turn", "face", "put",
            "pick", "move_dir", "run_dirs", "move_face", "null", "conditional",
@@ -115,7 +132,7 @@ while True:
     tok = lexer.token()
     if not tok:
         break  # No more input
-    print(tok)
+    #print(tok)
     lista_tokens.append(tok)
 
 def parser_defvar():
@@ -156,6 +173,7 @@ def parser_name():
             return False
     else:
         return False
+print(parser_defvar())
 def parser_move():
     i=0
     if lista_tokens[i].type=="left_parenth":
